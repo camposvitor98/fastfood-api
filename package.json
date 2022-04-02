@@ -25,6 +25,7 @@
     "express": "^4.17.3"
   },
   "prisma": {
-    "seed": "ts-node prisma/seed.ts"
+    "seed": "ts-node prisma/seed.ts",
+    "generate": "prisma generate"
   }
 }

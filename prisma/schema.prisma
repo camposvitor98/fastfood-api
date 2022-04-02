@@ -7,27 +7,89 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Breads {
-  id    String @id @default(uuid())
-  label String
+enum IngredientsCategory {
+  breads
+  meats
+  salads
+  sauces
+  cheeses
+  complements
 }
 
-model Meats {
-  id    String @id @default(uuid())
-  label String
+enum UsersRoles {
+  consumer
+  employee
+  manager
+  admin
 }
 
-model Salads {
-  id    String @id @default(uuid())
-  label String
-}
-
-model Sauces {
-  id    String @id @default(uuid())
-  label String
+enum CheckoutStatus {
+  pending
+  preparing
+  done
+  delivering
+  concluded
 }
 
 model Ingredients {
-  id    String @id @default(uuid())
-  label String
+  id        String   @id @default(uuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  name               String
+  price              Float?
+  description        String?
+  ingredientCategory IngredientsCategory
+  orders             Orders              @relation(fields: [ordersId], references: [id])
+  ordersId           String              @unique
+}
+
+model Orders {
+  id        String   @id @default(uuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  Ingredients Ingredients?
+  Checkouts   Checkouts    @relation(fields: [checkoutsId], references: [id])
+  checkoutsId String
+}
+
+model Checkouts {
+  id        String   @id @default(uuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  orderNumber Int            @default(autoincrement())
+  status      CheckoutStatus
+  orders      Orders[]
+
+  ordersId String
+}
+
+model UserAddresses {
+  id        String   @id @default(uuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  city    String
+  state   String
+  number  String
+  streat  String
+  country String
+
+
+  Users   Users?  @relation(fields: [usersId], references: [id])
+  usersId String?
+}
+
+model Users {
+  id        String   @id @default(uuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  name     String
+  email    String          @unique
+  password String
+  role     UsersRoles
+  address  UserAddresses[]
 }

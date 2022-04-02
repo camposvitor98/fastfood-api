@@ -46,3 +46,14 @@
   - ```bash
         npm run migration:insert [migration name]
     ```
+
+# When update schema:
+
+- Run one of the commands below to update your schema:
+
+  - ```bash
+        yarn prisma generate
+    ```
+  - ```bash
+        npm run prisma generate
+    ```
