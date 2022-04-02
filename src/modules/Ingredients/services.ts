@@ -1,13 +1,13 @@
-import { Prisma } from "@prisma/client";
 import { prisma } from "../../infra/server";
+import { IngredientsRepository } from "./repository";
 
 type Ingredient = {
   id: string;
 };
-
+const ingredientsRepository = new IngredientsRepository();
 class IngredientsServices {
   getAllIngredients = async () => {
-    const breads = await prisma.breads.findMany();
+    const breads = await ingredientsRepository.findMany();
 
     const meats = await prisma.meats.findMany();
 
