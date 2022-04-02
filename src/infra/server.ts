@@ -1,4 +1,3 @@
-import { PrismaClient } from "@prisma/client";
 import express from "express";
 import { routes } from "./routes";
 
@@ -12,5 +11,3 @@ app.listen(3333, () =>
 🚀 Server ready at: http://localhost:3333
 `)
 );
-
-export const prisma = new PrismaClient();

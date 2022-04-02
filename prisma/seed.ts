@@ -1,33 +1,51 @@
-import { prisma } from "../src/infra/server";
+import { prisma } from "./prismaClient";
+
 type Ingredient = {
-  label: string;
+  name: string;
 };
 
 type Data = {
   data: Ingredient[];
 };
 
-const breads: Data = { data: [{ label: "initial Data" }] };
-
-const meats: Data = { data: [{ label: "initial Data" }] };
-
-const salads: Data = { data: [{ label: "initial Data" }] };
-
-const sauces: Data = { data: [{ label: "initial Data" }] };
-
-const ingredients: Data = { data: [{ label: "initial Data" }] };
+const ingredients: Data = { data: [{ name: "initial Data" }] };
 
 async function main() {
   console.log(`Start seeding ...`);
-  await prisma.breads.createMany(breads);
 
-  await prisma.meats.createMany(meats);
-
-  await prisma.salads.createMany(salads);
-
-  await prisma.sauces.createMany(sauces);
-
-  await prisma.ingredients.createMany(ingredients);
+  await prisma.ingredients.createMany({
+    data: [
+      {
+        name: "Bife de picanha 100g",
+        ingredientCategory: "meats",
+        quantity: 60,
+        price: 5.6,
+        description:
+          "Uma deliciosa carne de hamburger, 100% artesanal e 100% picanha. Temperada com sal de parrilha e pimenta do reino ",
+      },
+      {
+        name: "Fatias de bacon 70g",
+        ingredientCategory: "complements",
+        quantity: 60,
+        price: 3.6,
+        description: "Fatias super crocantes de bacon",
+      },
+      {
+        name: "Alface",
+        ingredientCategory: "salads",
+        quantity: 60,
+        price: 1,
+        description: "Uma porção de alface sempre fresquinho",
+      },
+      {
+        name: "Molho especial 50ml",
+        ingredientCategory: "sauces",
+        quantity: 60,
+        price: 1.5,
+        description: "Nosso molho a base de mostarda e picles",
+      },
+    ],
+  });
 
   console.log(`Seeding finished.`);
 }

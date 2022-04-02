@@ -4,7 +4,7 @@ import { IngredientsServices } from "./services";
 const ingredientsServices = new IngredientsServices();
 
 class IngredientsControllers {
-  createPost = async (req: Request, res: Response): Promise<Response> => {
+  getIngredients = async (req: Request, res: Response): Promise<Response> => {
     try {
       const result = await ingredientsServices.getAllIngredients();
       return res.json(result);

@@ -4,6 +4,7 @@ const routes = Router();
 
 const ingredientsControllers = new IngredientsControllers();
 
-routes.get(`/ingredients`, ingredientsControllers.getAllIngredients);
+routes.get(`/`, () => "Server running");
+routes.get(`/ingredients`, ingredientsControllers.getIngredients);
 
 export { routes };

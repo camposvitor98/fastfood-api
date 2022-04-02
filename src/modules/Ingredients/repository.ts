@@ -1,4 +1,4 @@
-import { prisma } from "../../infra/server";
+import { prisma } from "../../../prisma/prismaClient";
 
 class IngredientsRepository {
   aggregate = prisma["ingredients"].aggregate;

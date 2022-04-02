@@ -39,9 +39,10 @@ model Ingredients {
   name               String
   price              Float?
   description        String?
+  quantity           Int
   ingredientCategory IngredientsCategory
-  orders             Orders              @relation(fields: [ordersId], references: [id])
-  ordersId           String              @unique
+  orders             Orders?             @relation(references: [id], fields: [ordersId])
+  ordersId           String?             @unique
 }
 
 model Orders {
@@ -49,8 +50,8 @@ model Orders {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  Ingredients Ingredients?
-  Checkouts   Checkouts    @relation(fields: [checkoutsId], references: [id])
+  ingredients Ingredients?
+  checkouts   Checkouts    @relation(fields: [checkoutsId], references: [id])
   checkoutsId String
 }
 
@@ -60,10 +61,10 @@ model Checkouts {
   updatedAt DateTime @updatedAt
 
   orderNumber Int            @default(autoincrement())
-  status      CheckoutStatus
+  status      CheckoutStatus @default(pending)
   orders      Orders[]
 
-  ordersId String
+  ordersId String[]
 }
 
 model UserAddresses {
@@ -78,7 +79,7 @@ model UserAddresses {
   country String
 
 
-  Users   Users?  @relation(fields: [usersId], references: [id])
+  users   Users?  @relation(fields: [usersId], references: [id])
   usersId String?
 }
 
