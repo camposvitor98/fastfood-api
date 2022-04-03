@@ -1,15 +1,5 @@
 import { prisma } from "./prismaClient";
 
-type Ingredient = {
-  name: string;
-};
-
-type Data = {
-  data: Ingredient[];
-};
-
-const ingredients: Data = { data: [{ name: "initial Data" }] };
-
 async function main() {
   console.log(`Start seeding ...`);
 
