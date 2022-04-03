@@ -9,18 +9,19 @@ describe("Get all ingredients", () => {
     expect(Array.isArray(ingredients)).toBe(true);
 
     if (ingredients.length) {
-      const ingredient = ingredients[0];
-      expect(ingredient).toHaveProperty("id");
-      expect(ingredient).toHaveProperty("createdAt");
-      expect(ingredient).toHaveProperty("updatedAt");
-      expect(ingredient).toHaveProperty("name");
-      expect(ingredient).toHaveProperty("quantity");
-      expect(ingredient).toHaveProperty("ingredientCategory");
+      ingredients.forEach((ingredient) => {
+        expect(ingredient).toHaveProperty("id");
+        expect(ingredient).toHaveProperty("createdAt");
+        expect(ingredient).toHaveProperty("updatedAt");
+        expect(ingredient).toHaveProperty("name");
+        expect(ingredient).toHaveProperty("quantity");
+        expect(ingredient).toHaveProperty("ingredientCategory");
 
-      const isValidCategory = Object.keys(IngredientsCategory).includes(
-        ingredient.ingredientCategory
-      );
-      expect(isValidCategory).toBeTruthy();
+        const isValidCategory = Object.keys(IngredientsCategory).includes(
+          ingredient.ingredientCategory
+        );
+        expect(isValidCategory).toBeTruthy();
+      });
     } else {
       expect(ingredients.length).toBeFalsy();
     }
